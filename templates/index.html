@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Repo Finder</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+ 
+    <style>
+        * {
+            margin : 0px;
+            padding : 0px;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 40%;
+            border: 2px solid grey;
+            border-radius: 9px;
+            margin: 5vh auto;
+            display: flex;
+            flex-direction: column;
+            padding : 10px;
+            font-family: Verdana;
+            background-color: #f8f8f8;
+        }
+        hr {
+            width: 80%; 
+            margin: 5px auto;
+        }
+        .form {
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            margin: auto;
+            justify-content: center;
+            align-items: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input {
+            width: 100%;
+            padding: 3px;
+            border: 1px solid black;
+            border-radius: 3px;
+            margin: 3px 0px;
+        }
+        form button {
+            font-family: Verdana;
+            width: 70px;
+            padding : 3px;
+            border: 1px solid black;
+            border-radius: 3px;
+            background-color: white;
+            margin : 5px 0px; 
+        }
+        .form label {
+            margin-top: 5px;
+        }
+        .repos {
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+            width: 70%;
+        }
+        .repos .center {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+ 
+        .block {
+            margin: auto;
+            display: flex;
+            width: 80%;
+        }
+        .left {
+            justify-content: flex-start;
+        }
+        .right {
+            margin-left: auto;
+        }
+        .items {
+            border-radius: 9px;
+        }
+        .repo-details {
+            margin: 7px 0px;
+        }
+ 
+    </style>
+ 
+<body>
+    <div class="container">
+    <div class="form">
+        <form method='post'> 
+            {% csrf_token %} 
+            <label>Company Name</label>
+            <input type="text" name="company_name" placeholder="google">
+ 
+            <label>Value of N</label>
+            <input type="number" name="value_of_n" placeholder="2">
+ 
+            <label>Value of M</label>
+            <input type="number" name="value_of_m" placeholder="3">
+ 
+            <button type='submit'> Submit </button>
+        </form>
+    </div>
+    <hr>
+    <div class="repos">
+        <h1 class="center">Repositories</h1>
+        {%for repo in repo_data %}
+        <div class="items">
+            <div class="repo-details">
+            <h3  class="center">Repo details</h3>
+            <div class="block">
+                <div class="left"><p> Repo name</p></div>
+                <div class="right"><p>{{ repo.name }}</p></div>
+            </div>
+ 
+            <div class="block">
+                <div class="left">
+                    <p> URL </p>
+                </div>
+                <div class="right">
+                    <p>{{ repo.url }}</p>
+                </div>
+            </div>
+            <div class="block">
+                <div class="left">
+                    <p>Fork(s)</p>
+                </div>
+                <div class="right">
+                    <p>{{ repo.forks }}</p>
+                </div>
+            </div>
+        </div>
+            <h3 class="center"> TOP commits </h3>
+            {% for commit in repo.commits %}
+                <div class="repo-details">
+                    <div class="block">
+                        <div class="left">
+                            <p>User</p>
+                        </div>
+                        <div class="right">
+                            <p>{{ commit.name }}</p>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <div class="left">
+                            <p>Commits</p>
+                        </div>
+                        <div class="right">
+                            <p>{{ commit.commit_count }}</p>
+                        </div>
+                    </div>
+                    <div class="block">
+                        <div class="left">
+                            <p>Profile</p>
+                        </div>
+                        <div class="right">
+                            <p>{{ commit.profile_url }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+    
+</body>
+ 
+</html>

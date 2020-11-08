@@ -1,0 +1,14 @@
+How to Use the Web application:
+1. Click on the link 
+2. Enter the company name, values of N and M
+3. The output is shown in the same page, top N repositories sorted by forks having M committers each.
+
+The application is made using Django Framework
+
+Used github API for searching the required data
+
+The number of API calls may be limited so N has only been tested for upto 30. 
+
+The file views.py under almabase_task contains the logic used for backend and frontend is very simple CSS
+ 
+

@@ -1,0 +1,1 @@
+web: gunicorn almabase_task.wsgi --log-file -
