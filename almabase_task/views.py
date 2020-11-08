@@ -10,7 +10,7 @@ def index(request):
 
 	# get company name, value of M and N from the user
 
-	company = request.POST.get('company_name', 'default')
+	company = request.POST.get('company_name', 'google')
 	_N = request.POST.get('value_of_n', 1)
 	_M = request.POST.get('value_of_m', 1)
 
@@ -18,15 +18,12 @@ def index(request):
 	M = int(_M)
 
 	if N <= 0 or M <= 0:
-		return HttpResponse("Invalid Values Entered")
+		N = 1
+		M = 1
 
 	# API response converted into json array
 	response = requests.get(url.format(company)).json()
 	
-	if 'message' in response:
-		if response['message'] == 'Not Found':
-			return HttpResponse("Error")
-
 	# sorting responses by forks count
 	response.sort(key = lambda repo:repo["forks_count"], reverse = True)
 	

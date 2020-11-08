@@ -1,5 +1,5 @@
 How to Use the Web application:
-1. Click on the link 
+1. Click on the link https://mysterious-bayou-74988.herokuapp.com/
 2. Enter the company name, values of N and M
 3. The output is shown in the same page, top N repositories sorted by forks having M committers each.
 
